@@ -101,4 +101,4 @@ firebase deploy
 
 ## デモ
 
-アプリのデモは以下のURLで利用できます: [MokoTodoApp](https://mokotodoapp-469c4.web.app/login)
+アプリのデモは以下のURLで利用できます: https://mokotodoapp-469c4.web.app/
