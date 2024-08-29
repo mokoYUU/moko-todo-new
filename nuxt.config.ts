@@ -1,11 +1,6 @@
-// nuxt.config.ts
-export default defineNuxtConfig({
+export default defineNuxtConfig({ 
+  srcDir: 'src/',
   css: ['vuetify/styles'],
-
-  plugins: [
-    '~/plugins/firebase.ts', 
-    '~/plugins/vuetify.ts',
-  ],
 
   build: {
     transpile: ['vuetify'],

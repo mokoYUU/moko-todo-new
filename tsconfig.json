@@ -1,6 +1,6 @@
 {
   "extends": "./.nuxt/tsconfig.json",
   "compilerOptions": {
-    "types": ["./types/vue-shim"]
+    "types": ["./src/types/vue-shim"]
   }
 }
