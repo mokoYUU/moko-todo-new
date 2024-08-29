@@ -1,5 +1,5 @@
-export default defineNuxtConfig({
-  srcDir: 'src/', 
+export default defineNuxtConfig({ 
+  srcDir: 'src/',
   css: ['vuetify/styles'],
 
   build: {
