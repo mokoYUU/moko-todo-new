@@ -1,5 +1,5 @@
 // /middleware/auth.ts
-import { defineNuxtRouteMiddleware, navigateTo } from '#app'
+import { defineNuxtRouteMiddleware, navigateTo, useNuxtApp } from '#app'
 
 export default defineNuxtRouteMiddleware((to, from) => {
   const { $auth } = useNuxtApp()
