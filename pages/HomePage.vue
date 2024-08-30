@@ -1,6 +1,6 @@
+<!-- pages/HomePage.vue -->
 <template>
   <v-app>
-    <!-- メインコンテンツコンテナ　カード内　タイトル中央、ボタン中央-->
     <v-main class="d-flex align-center justify-center" style="background-color: #f5f5f5;">
       <v-card class="pa-10" elevation="3" max-width="1000">
         <v-card-title class="text-h4 text-center">Todoリスト管理アプリへ</v-card-title>
@@ -20,17 +20,15 @@
 </template>
 
 <script setup>
-  // Vue Routerのフック　➡︎　ルーティングを可能
-  import { useRouter } from 'vue-router'
-  const router = useRouter()
+import { useRouter } from 'vue-router'
 
-  // ログインページへ遷移させる
-  const goToLogin = () => {
-    router.push('/login')
-  }
+const router = useRouter()
 
-  // サインアップページへ遷移させる
-  const goToSignUp = () => {
-    router.push('/signup')
-  }
+const goToLogin = () => {
+  router.push('/LoginPage')
+}
+
+const goToSignUp = () => {
+  router.push('/SignupPage')
+}
 </script>

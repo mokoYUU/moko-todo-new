@@ -3,7 +3,6 @@
     <v-main>
       <v-container class="ma-5">
         <v-card class="pa-6 mb-6" elevation="2">
-          <!-- タスク追加フォーム -->
           <v-form @submit.prevent="addTask">
             <v-text-field
               v-model="taskTitle"
@@ -30,13 +29,11 @@
             class="my-2"
             :class="task.completed ? 'task-completed' : ''"
           >
-            <!-- タスクタイトル表示カード -->
             <v-card class="w-100 pa-4" elevation="1">
               <v-list-item-content>
                 <v-list-item-title>{{ task.title }}</v-list-item-title>
               </v-list-item-content>
               <v-list-item-action>
-                <!-- タスク完了ボタン -->
                 <v-btn
                   icon
                   color="success"
@@ -46,7 +43,6 @@
                   <v-icon>mdi-check-circle-outline</v-icon>
                 </v-btn>
                 <span>完了</span>
-                <!-- タスク削除ボタン -->
                 <v-btn
                   icon
                   color="error"
@@ -70,17 +66,11 @@ import { ref, onMounted, computed } from 'vue'
 import { useNuxtApp } from '#app'
 import { collection, addDoc, getDocs, doc, updateDoc, deleteDoc } from 'firebase/firestore'
 
-// middleware/auth.js
-definePageMeta({
-  middleware: 'auth' // 認証ミドルウェア
-})
-
 const taskTitle = ref('')
 const tasks = ref([])
 const filter = ref('すべて')
 const { $db, $auth } = useNuxtApp()
 
-// タスク追加処理
 const addTask = async () => {
   if (!taskTitle.value) return
 
@@ -99,7 +89,6 @@ const addTask = async () => {
   taskTitle.value = ''
 }
 
-// タスク取得処理
 const fetchTasks = async () => {
   if (!$auth.currentUser) {
     console.error('ユーザーがログインしていません。')
@@ -113,20 +102,17 @@ const fetchTasks = async () => {
   })).filter(task => task.userId === $auth.currentUser.uid)
 }
 
-// タスク完了状態をトグル
 const toggleComplete = async (task) => {
   task.completed = !task.completed
   const taskRef = doc($db, 'tasks', task.id)
   await updateDoc(taskRef, { completed: task.completed })
 }
 
-// タスク削除処理
 const deleteTask = async (id) => {
   await deleteDoc(doc($db, 'tasks', id))
   tasks.value = tasks.value.filter(task => task.id !== id)
 }
 
-// フィルタリングされたタスクリストを取得
 const filteredTasks = computed(() => {
   if (filter.value === '完了') {
     return tasks.value.filter(task => task.completed)
@@ -137,8 +123,13 @@ const filteredTasks = computed(() => {
   }
 })
 
-// コンポーネントがマウントされたときにタスクを取得
 onMounted(fetchTasks)
+</script>
+
+<script>
+export default {
+  middleware: 'auth'
+}
 </script>
 
 <style scoped>
