@@ -1,13 +1,24 @@
 // plugins/firebase.ts
-// 認証サービス(auth)+データベース(db)を全体で使う
-import { defineNuxtPlugin } from '#app'
-import { auth, db } from '~/firebaseConfig'
+import { initializeApp, getApps } from 'firebase/app'
+import { getAuth } from 'firebase/auth'
+import { getFirestore } from 'firebase/firestore'
+import { useRuntimeConfig } from '#app'
 
-export default defineNuxtPlugin((nuxtApp) => {
-  if (!nuxtApp.vueApp.config.globalProperties.$auth) {
-    nuxtApp.provide('auth', auth)
+export default defineNuxtPlugin(() => {
+  const config = useRuntimeConfig().public;
+
+  const firebaseConfig = {
+    apiKey: config.apiKey,
+    authDomain: config.authDomain,
+    projectId: config.projectId,
+    storageBucket: config.storageBucket,
+    messagingSenderId: config.messagingSenderId,
+    appId: config.appId,
+    measurementId: config.measurementId,
+  };
+
+  if (!getApps().length) {
+    initializeApp(firebaseConfig);
   }
-  if (!nuxtApp.vueApp.config.globalProperties.$db) {
-    nuxtApp.provide('db', db)
-  }
-})
+});
+
